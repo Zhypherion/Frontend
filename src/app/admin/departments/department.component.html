@@ -1,0 +1,24 @@
+<div class="container mt-3">
+  <h3>Departments</h3>
+  <a routerLink="add" class="btn btn-primary mb-2">Add Department</a>
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dept of departments">
+        <td>{{ dept.id }}</td>
+        <td>{{ dept.name }}</td>
+        <td>
+          <a [routerLink]="['edit', dept.id]" class="btn btn-sm btn-warning">Edit</a>
+          <button class="btn btn-sm btn-danger" (click)="deleteDepartment(dept.id!)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
