@@ -7,9 +7,9 @@ export interface Employee {
   status: string;
   employeeId?: string;
   account?: Account;     // relation to Account
-  position?: string | null;
-   department?: Department; 
-  hireDate?: string | null;
+  position?: string;
+  department?: string;
+  hireDate?: string;
   
   
 }

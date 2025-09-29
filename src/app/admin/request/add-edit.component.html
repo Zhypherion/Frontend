@@ -1,0 +1,54 @@
+<h2 class="text-2xl font-bold mb-4">{{ isAddMode ? 'Add Request' : 'Edit Request' }}</h2>
+
+<form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 max-w-lg">
+  <div>
+    <label class="block mb-1">Employee</label>
+    <select formControlName="employeeId" class="form-control w-full">
+      <option value="">-- Select Employee --</option>
+      <option *ngFor="let emp of employees" [value]="emp.id">
+        {{ emp.employeeId }} - {{ emp.account?.email }}
+      </option>
+    </select>
+    <div *ngIf="submitted && f['employeeId'].errors" class="text-red-500 text-sm">
+      Employee is required
+    </div>
+  </div>
+
+  <div>
+  <label class="block mb-1">Type</label>
+  <select formControlName="type" class="form-control w-full">
+    <option value="">-- Select Type --</option>
+    <option value="Equipment">Equipment</option>
+    <option value="Leave">Leave</option>
+    <option value="Resource">Resource</option>
+  </select>
+  <div *ngIf="submitted && f['type'].errors" class="text-red-500 text-sm">
+    Type is required
+  </div>
+</div>
+
+
+  <div>
+    <label class="block mb-1">Items</label>
+    <input type="text" formControlName="items" class="form-control w-full" />
+    <div *ngIf="submitted && f['items'].errors" class="text-red-500 text-sm">
+      Items are required
+    </div>
+  </div>
+
+  <div>
+    <label class="block mb-1">Status</label>
+    <select formControlName="status" class="form-control w-full">
+      <option value="Pending">Pending</option>
+      <option value="Approved">Approved</option>
+      <option value="Denied">Denied</option>
+    </select>
+  </div>
+
+  <div class="pt-4">
+    <button [disabled]="loading" class="btn btn-primary">
+      {{ isAddMode ? 'Create' : 'Update' }}
+    </button>
+    <a routerLink="/admin/requests" class="btn btn-secondary ml-2">Cancel</a>
+  </div>
+</form>

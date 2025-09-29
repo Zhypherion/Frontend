@@ -16,22 +16,33 @@
     </tr>
   </thead>
   <tbody>
+    <tr *ngIf="loading">
+        <td colspan="7" class="text-center">
+            <span class="spinner-border spinner-border-lg align-center"></span>
+        </td>
+    </tr>
+    <tr *ngIf="!loading && employees.length === 0">
+      <td colspan="7" class="text-center">
+          No employees found.
+      </td>
+    </tr>
     <tr *ngFor="let employee of employees">
       <td>{{ employee.employeeId || '—' }}</td>
       <td>{{ employee.account?.email || '—' }}</td>
       <td>{{ employee.position || '—' }}</td>
       <td>{{ employee.department || '—' }}</td>
+
       <td>{{ employee.hireDate ? (employee.hireDate | date:'shortDate') : '—' }}</td>
       <td>
-        <span 
-          class="badge"
-          [ngClass]="{
-            'bg-success': employee.account?.status === 'Active',
-            'bg-danger': employee.account?.status === 'Inactive'
-          }">
-          {{ employee.account?.status || '—' }}
-        </span>
-      </td>
+  <span
+    class="badge"
+    [ngClass]="{
+      'bg-success': employee.status === 'Active',
+      'bg-danger': employee.status === 'Inactive'
+    }">
+    {{ employee.status | titlecase }}
+</span>
+</td>
       <td style="white-space: nowrap">
         <a [routerLink]="['/admin/requests']" class="btn btn-sm btn-info me-1">Requests</a>
         <a [routerLink]="['/admin/workflows', employee.employeeId]" class="btn btn-sm btn-info me-1">Workflows</a>
@@ -39,13 +50,5 @@
         <a [routerLink]="['/admin/employees/edit', employee.employeeId]" class="btn btn-sm btn-primary">Edit</a>
       </td>
     </tr>
-
-    <!-- Loading spinner -->
-    <tr *ngIf="!employees || employees.length === 0">
-      <td colspan="7" class="text-center">
-        <span class="spinner-border spinner-border-lg align-center"></span>
-      </td>
-    </tr>
-    
-  </tbody>
+</tbody>
 </table>

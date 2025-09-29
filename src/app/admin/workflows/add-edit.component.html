@@ -1,0 +1,75 @@
+<div class="card shadow-sm rounded-3">
+  <div class="card-header bg-light">
+    <h3 class="mb-0">{{ title }}</h3>
+  </div>
+
+  <div class="card-body" *ngIf="!loading; else loadingTpl">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <!-- Type -->
+      <div class="mb-3">
+        <label class="form-label">Type</label>
+        <input
+          type="text"
+          formControlName="type"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': f.type.touched && f.type.invalid }"
+        />
+        <div *ngIf="f.type.touched && f.type.invalid" class="invalid-feedback">
+          Type is required
+        </div>
+      </div>
+
+      <!-- Details -->
+      <div class="mb-3">
+        <label class="form-label">Details</label>
+        <input
+          type="text"
+          formControlName="details"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': f.details.touched && f.details.invalid }"
+        />
+        <div *ngIf="f.details.touched && f.details.invalid" class="invalid-feedback">
+          Details are required
+        </div>
+      </div>
+
+      <!-- Status -->
+      <div class="mb-3">
+        <label class="form-label">Status</label>
+        <select formControlName="status" class="form-select">
+          <option value="Pending">Pending</option>
+          <option value="Approved">Approved</option>
+          <option value="Rejected">Rejected</option>
+        </select>
+      </div>
+
+      <!-- Request -->
+      <div class="mb-3">
+        <label class="form-label">Request (optional)</label>
+        <select formControlName="requestId" class="form-select">
+          <option [ngValue]="null">-- None --</option>
+          <option *ngFor="let req of requests" [value]="req.id">
+            {{ req.type }} - {{ req.details }}
+          </option>
+        </select>
+      </div>
+
+      <button
+        type="submit"
+        class="btn btn-primary"
+        [disabled]="submitting || form.invalid"
+      >
+        {{ submitting ? 'Saving...' : 'Save' }}
+      </button>
+      <a [routerLink]="['/admin/workflows', employeeId]" class="btn btn-secondary ms-2">
+        Cancel
+      </a>
+    </form>
+  </div>
+
+  <ng-template #loadingTpl>
+    <div class="text-center p-3">
+      <div class="spinner-border"></div>
+    </div>
+  </ng-template>
+</div>

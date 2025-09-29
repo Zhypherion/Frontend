@@ -63,4 +63,22 @@ export class AddEditComponent implements OnInit {
       })
       .add(() => this.loading = false);
   }
+
+
+//<<<
+  save() {
+    if (this.form.invalid) return;
+
+    this.loading = true;
+    this.departmentService.create(this.form.value).subscribe({
+      next: () => {
+        this.loading = false;
+        this.router.navigate(['/admin/departments']);
+      },
+      error: err => {
+        console.error('Failed to save department', err);
+        this.loading = false;
+      }
+    });
+  }
 }

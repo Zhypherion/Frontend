@@ -5,38 +5,39 @@ import { EmployeeService } from '@app/_services/employee.service';
 import { AccountService } from '@app/_services/account.service';
 import { DepartmentService } from '@app/_services/department.service';
 
+
 @Component({
   selector: 'app-employee-form',
   templateUrl: './employees.component.html'
 })
 export class EmployeesComponent implements OnInit {
-  form!: FormGroup;
-  employees: Employee[] = [];
-  accounts: any[] = [];
-  departments: any[] = [];
-  loading: boolean = false;   // 👈 add this
+    form!: FormGroup;
+    employees: Employee[] = [];
+    accounts: any[] = [];
+    departments: any[] = [];
+    loading: boolean = false; 
 
-  constructor(
-    private fb: FormBuilder,
-    private employeeService: EmployeeService,
-    private accountService: AccountService,
-    private departmentService: DepartmentService
-  ) {}
+    constructor(
+      private fb: FormBuilder,
+      private employeeService: EmployeeService,
+      private accountService: AccountService,
+      private departmentService: DepartmentService
+    ) {}
 
-  ngOnInit() {
-     this.loadEmployees();
-    this.form = this.fb.group({
-      accountId: ['', Validators.required],
-      position: [''],
-      departmentId: ['', Validators.required],
-      hireDate: [''],
-      status: ['Active', Validators.required]
-    });
+    ngOnInit() {
+        this.loadEmployees();
+        this.form = this.fb.group({
+          accountId: ['', Validators.required],
+          position: ['', Validators.required],
+          departmentId: ['', Validators.required], // ✅ CHANGED: Use departmentId
+          hireDate: ['', Validators.required],
+          status: ['Active', Validators.required]
+        });
 
-    // Load accounts & departments
-    this.accountService.getAll().subscribe(accounts => this.accounts = accounts);
-    this.departmentService.getAll().subscribe(depts => this.departments = depts);
-  }
+        // Load accounts & departments
+        this.accountService.getAll().subscribe(accounts => this.accounts = accounts);
+        this.departmentService.getAll().subscribe(depts => this.departments = depts);
+    }
 
   submit() {
     if (this.form.valid) {
