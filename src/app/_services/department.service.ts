@@ -7,7 +7,7 @@ import { Employee } from '@app/_models/employee';
 
 @Injectable({ providedIn: 'root' })
 export class DepartmentService {
-  private baseUrl = `${environment.apiUrl}/departments`;
+  private baseUrl = `https://api-1-71ag.onrender.com/departments`;
 
   constructor(private http: HttpClient) {}
 
