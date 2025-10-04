@@ -32,7 +32,7 @@ export class TransferComponent implements OnInit {
     });
 
     // Load departments list (adjust API to your backend)
-    this.http.get<any[]>('http://localhost:4000/departments').subscribe({
+    this.http.get<any[]>('https://api-1-71ag.onrender.com/departments').subscribe({
       next: (res) => (this.departments = res),
       error: (err) => console.error('Could not load departments', err)
     });
