@@ -6,7 +6,7 @@ import { Employee } from '@app/_models/employee';
 
 @Injectable({ providedIn: 'root' })
 export class EmployeeService {
-  private baseUrl = 'http://localhost:4000/employees'; // backend base URL
+  private baseUrl = 'https://api-1-71ag.onrender.com/employees'; // backend base URL
 
   constructor(private http: HttpClient) {}
 
