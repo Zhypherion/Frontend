@@ -16,41 +16,41 @@
     </tr>
   </thead>
   <tbody class="bg-white text-gray-700">
-    <tr *ngIf="loading" class="animate-pulse">
-      <td colspan="7" class="p-4 text-center">
-        <div class="flex items-center justify-center">
-          <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-gray-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-          </svg>
-          Loading...
-        </div>
+    <!-- ✅ Updated loading spinner -->
+    <tr *ngIf="loading">
+      <td colspan="7" class="text-center py-4">
+        <span class="spinner-border spinner-border-lg align-center"></span>
       </td>
     </tr>
 
+    <!-- ✅ Empty state -->
     <tr *ngIf="!loading && requests.length === 0">
-      <td colspan="7" class="p-4 text-center text-gray-500">No requests found.</td>
+      <td colspan="7" class="text-center text-gray-500 py-4">
+        No requests found.
+      </td>
     </tr>
 
+    <!-- ✅ Data rows -->
     <tr *ngFor="let request of requests" class="border-b border-gray-200 hover:bg-gray-100">
       <td class="py-3 px-4">{{ request.id }}</td>
       <td class="py-3 px-4">
-        {{ request.employee?.employeeId }} -
-        {{ request.employee?.account?.email }}
+        {{ request.employee?.employeeId }} - {{ request.employee?.account?.email }}
       </td>
       <td class="py-3 px-4">{{ request.type }}</td>
       <td class="py-3 px-4">{{ request.items }}</td>
       <td class="py-3 px-4">
-        <span class="px-2 py-1 rounded-full text-xs font-semibold"
+        <span
+          class="px-2 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
             'bg-green-100 text-green-800': request.status === 'Approved',
             'bg-yellow-100 text-yellow-800': request.status === 'Pending',
             'bg-red-100 text-red-800': request.status === 'Rejected'
-          }">
+          }"
+        >
           {{ request.status }}
         </span>
       </td>
-      <td class="py-3 px-4">{{ request.createdAt | date:'short' }}</td>
+      <td class="py-3 px-4">{{ request.createdAt | date: 'short' }}</td>
       <td class="py-3 px-4">
         <a [routerLink]="['/admin/requests/edit', request.id]" class="btn btn-sm btn-info me-2">Edit</a>
       </td>
