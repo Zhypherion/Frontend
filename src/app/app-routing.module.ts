@@ -10,6 +10,7 @@ import { Role } from './_models';
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 const profileModule = () => import('./profile/profile.module').then(x => x.ProfileModule);
+const RequestModule = () => import('./request/request.module').then(x => x.RequestModule);
 
 // New lazy-loaded modules
 const employeeModule = () => import('./admin/employees/employee.module').then(x => x.EmployeeModule);
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'account', loadChildren: accountModule },
   { path: 'profile', loadChildren: profileModule, canActivate: [AuthGuard] },
   { path: 'admin', loadChildren: adminModule, canActivate: [AuthGuard], data: { roles: [Role.Admin] } },
+  { path: 'request', loadChildren: RequestModule, canActivate: [AuthGuard] },
 
   // ✅ New Pages
   { path: 'admin/employees', loadChildren: employeeModule, canActivate: [AuthGuard] },
