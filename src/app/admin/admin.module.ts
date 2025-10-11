@@ -7,16 +7,19 @@ import { SubNavComponent } from './subnav.component';
 import { LayoutComponent } from './layout.component';
 import { OverviewComponent } from './overview.component';
 
+
 @NgModule({
     imports: [
         CommonModule,
         ReactiveFormsModule,
-        AdminRoutingModule
+        AdminRoutingModule,
+         ReactiveFormsModule, // ✅ required for formGroup
     ],
     declarations: [
         SubNavComponent,
         LayoutComponent,
-        OverviewComponent
+        OverviewComponent,
+        
     ]
 })
 export class AdminModule { }

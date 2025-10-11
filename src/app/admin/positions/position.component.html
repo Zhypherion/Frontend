@@ -1,0 +1,55 @@
+<h2>Positions</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="mb-4">
+  <div class="row">
+    <div class="col-md-3">
+      <label>Name</label>
+      <input formControlName="name" class="form-control">
+    </div>
+    <div class="col-md-3">
+      <label>Department</label>
+      <select formControlName="departmentId" class="form-select">
+        <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.name }}</option>
+      </select>
+    </div>
+    <div class="col-md-3">
+      <label>Hierarchy</label>
+      <select formControlName="hierarchyLevel" class="form-select">
+        <option value="Worker">Worker</option>
+        <option value="Supervisor">Supervisor</option>
+        <option value="Manager">Manager</option>
+      </select>
+    </div>
+    <div class="col-md-2">
+      <label>Status</label>
+      <select formControlName="status" class="form-select">
+        <option value="Active">Active</option>
+        <option value="Inactive">Inactive</option>
+      </select>
+    </div>
+    <div class="col-md-1 d-flex align-items-end">
+      <button class="btn btn-primary w-100" [disabled]="form.invalid">Add</button>
+    </div>
+  </div>
+</form>
+
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Department</th>
+      <th>Status</th>
+      <th>Hierarchy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let pos of positions">
+      <td>{{ pos.id }}</td>
+      <td>{{ pos.name }}</td>
+      <td>{{ pos.department?.name || '—' }}</td>
+      <td>{{ pos.status }}</td>
+      <td>{{ pos.hierarchyLevel }}</td>
+    </tr>
+  </tbody>
+</table>

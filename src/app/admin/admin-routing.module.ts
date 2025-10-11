@@ -9,6 +9,10 @@ const accountsModule = () => import('./accounts/accounts.module').then(x => x.Ac
 const employeesModule = () => import('./employees/employee.module').then(x => x.EmployeeModule);
 const departmentsModule = () => import('./departments/department.module').then(x => x.DepartmentModule);
 const requestsModule = () => import('./request/request.module').then(x => x.RequestModule);
+const positionsModule = () => import('./positions/position.module').then(x => x.PositionModule);
+
+
+
 
 const routes: Routes = [
     { path: '', component: SubNavComponent, outlet: 'subnav' },
@@ -20,6 +24,8 @@ const routes: Routes = [
             { path: 'employees', loadChildren: employeesModule },
             { path: 'departments', loadChildren: departmentsModule },
             { path: 'request', loadChildren: requestsModule },
+            { path: 'positions', loadChildren: positionsModule },
+
         ]
     }
 ];

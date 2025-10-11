@@ -9,6 +9,6 @@ export class Account {
     role?: Role;
     status?: string;
     account?: string;
-    
+    employeeId?: number;
     jwtToken?: string;
 }
