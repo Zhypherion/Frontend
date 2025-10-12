@@ -48,7 +48,7 @@
     <tr *ngFor="let pos of positions">
       <td>{{ pos.id }}</td>
       <td>{{ pos.name }}</td>
-      <td>{{ pos.department }}</td>
+      <td>{{ pos.department?.name || '—' }}</td>
       <td>{{ pos.status }}</td>
       <td>{{ pos.hierarchyLevel }}</td>
       <td>
