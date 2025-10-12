@@ -41,6 +41,7 @@
       <th>Department</th>
       <th>Status</th>
       <th>Hierarchy</th>
+      <th>Actions</th>
     </tr>
   </thead>
   <tbody>
@@ -50,6 +51,11 @@
       <td>{{ pos.department?.name || '—' }}</td>
       <td>{{ pos.status }}</td>
       <td>{{ pos.hierarchyLevel }}</td>
+      <td>
+        <button (click)="updateStatus(pos)" class="btn btn-sm btn-secondary">
+          {{ pos.status === 'Active' ? 'Deactivate' : 'Activate' }}
+        </button>
+      </td>
     </tr>
   </tbody>
 </table>

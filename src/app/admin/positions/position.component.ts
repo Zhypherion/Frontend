@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PositionService } from '../../_services/position.service';
-import { DepartmentService } from '@app/_services/department.service';
+import { DepartmentService } from '../../_services/department.service';
 
 @Component({
   selector: 'app-positions',
@@ -42,4 +42,13 @@ export class PositionComponent implements OnInit {
   loadPositions() {
     this.positionService.getAll().subscribe((p: any[]) => this.positions = p);
   }
+
+  updateStatus(p: any) {
+  const newStatus = p.status === 'Active' ? 'Inactive' : 'Active';
+  this.positionService.update(p.id, { status: newStatus }).subscribe(() => {
+    alert(`Status changed to ${newStatus}`);
+    this.loadPositions();
+  });
+}
+
 }

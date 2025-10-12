@@ -18,6 +18,7 @@ const departmentModule = () => import('./admin/departments/department.module').t
 const requestModule = () => import('./admin/request/request.module').then(x => x.RequestModule);
 const transferModule = () => import('./admin/transfer/transfer.module').then(x => x.TransferModule);
 const workflowsModule = () => import('./admin/workflows/workflows.module').then(x => x.WorkflowsModule);
+const positionsModule = () => import('./admin/positions/position.module').then(x => x.PositionModule);
 const routes: Routes = [
   { path: '', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'account', loadChildren: accountModule },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'admin/requests', loadChildren: requestModule, canActivate: [AuthGuard] },
   { path: 'admin/workflows', loadChildren: workflowsModule, canActivate: [AuthGuard] },
   { path: 'admin/transfer', loadChildren: transferModule, canActivate: [AuthGuard] },
+  { path: 'admin/positions', loadChildren: transferModule, canActivate: [AuthGuard] },
   // otherwise redirect to home
   { path: '**', redirectTo: '' }
 ];
