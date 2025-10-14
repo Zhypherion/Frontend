@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from '@environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class PositionService {
-  private baseUrl = 'https://api-1-71ag.onrender.com/positions';
-
+  private baseUrl = `${environment.apiUrl}/positions`; // ✅ dynamic URL
+  
   constructor(private http: HttpClient) {}
 
   getAll(): Observable<any[]> {
