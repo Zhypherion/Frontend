@@ -9,6 +9,7 @@
     <div class="col-md-3">
       <label>Department</label>
       <select formControlName="departmentId" class="form-select">
+        <option value="">-- Select Account --</option>
         <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.name }}</option>
       </select>
     </div>

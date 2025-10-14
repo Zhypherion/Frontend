@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { PositionService } from '../../_services/position.service';
-import { DepartmentService } from '../../_services/department.service';
+import { PositionService } from '@app/_services/position.service';
+import { DepartmentService } from '@app/_services/department.service';
 
 @Component({
   selector: 'app-positions',
@@ -28,16 +28,24 @@ export class PositionComponent implements OnInit {
       hierarchyLevel: ['Worker', Validators.required],
       departmentId: ['', Validators.required]
     });
+    this.departmentService.getAll().subscribe(depts => this.departments = depts);
   }
 
   submit() {
-    if (this.form.valid) {
-      this.positionService.create(this.form.value).subscribe(() => {
-        alert('Position created!');
-        this.loadPositions();
-      });
-    }
+  if (this.form.valid) {
+    const payload = { ...this.form.value };
+
+    // 👇 ensure departmentId is numeric
+    payload.departmentId = Number(payload.departmentId);
+
+    this.positionService.create(payload).subscribe(() => {
+      alert('Position created!');
+      this.loadPositions();
+      this.form.reset({ status: 'Active', hierarchyLevel: 'Worker' }); // optional reset
+    });
   }
+}
+
 
   loadPositions() {
     this.positionService.getAll().subscribe((p: any[]) => this.positions = p);
