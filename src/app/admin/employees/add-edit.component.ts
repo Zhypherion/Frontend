@@ -7,6 +7,7 @@ import { Subscription } from 'rxjs';
 import { DepartmentService } from '../../_services/department.service';
 import { EmployeeService, AlertService, AccountService } from '@app/_services';
 import { Employee } from '../../_models/employee';
+import { PositionService } from '../../_services/position.service'; 
 
 @Component({
   selector: 'app-employee-add-edit',
@@ -23,6 +24,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
 
   accounts: any[] = [];
   departments: any[] = [];
+  positions: any[] = []; 
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,7 +33,8 @@ export class AddEditComponent implements OnInit, OnDestroy {
     private employeeService: EmployeeService,
     private accountService: AccountService,
     private alertService: AlertService,
-    private departmentService: DepartmentService
+    private departmentService: DepartmentService,
+    private positionService: PositionService
   ) {}
 
   ngOnInit() {
@@ -46,6 +49,10 @@ export class AddEditComponent implements OnInit, OnDestroy {
     this.departmentService.getAll().pipe(first()).subscribe({
       next: (departments: any[]) => this.departments = departments,
       error: err => console.error('Error loading departments', err)
+    });
+    this.positionService.getAll().pipe(first()).subscribe({ // 👈 Add this
+      next: (positions: any[]) => this.positions = positions.filter(p => p.status === 'Active'),
+      error: err => console.error('Error loading positions', err)
     });
 
     // watch params (works for both add and edit routes)
@@ -112,7 +119,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
     this.form = this.formBuilder.group({
       employeeId: ['', Validators.required],
       accountId: ['', Validators.required],
-      position: ['', Validators.required],
+      positionId: ['', Validators.required],
       departmentId: ['', Validators.required],
       hireDate: ['', Validators.required],
       status: ['Active', Validators.required]

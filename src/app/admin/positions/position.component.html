@@ -13,6 +13,14 @@
         <option *ngFor="let dept of departments" [value]="dept.id">{{ dept.name }}</option>
       </select>
     </div>
+
+    <!-- <div class="col-md-3">
+      <label>Workflow</label>
+      <select formControlName="workflowId" class="form-select">
+        <option [value]="null">-- Select Workflow --</option>
+        <option *ngFor="let wf of workflows" [value]="wf.id">{{ wf.name }}</option>
+      </select>
+    </div> -->
     <div class="col-md-3">
       <label>Hierarchy</label>
       <select formControlName="hierarchyLevel" class="form-select">

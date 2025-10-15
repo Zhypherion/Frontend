@@ -7,4 +7,6 @@ export interface Position {
    department?: string;
   createdAt?: string;
   updatedAt?: string;
+//   workflowId?: number;
+//   workflow?: { id: number, name: string };
 }
