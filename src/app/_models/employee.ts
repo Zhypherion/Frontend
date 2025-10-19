@@ -1,5 +1,6 @@
 import { Account } from './account';
 import { Department } from './department';
+import { Position } from './position';
 
 export interface Employee {
   accountId: number;

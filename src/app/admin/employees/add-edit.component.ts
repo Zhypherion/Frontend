@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { DepartmentService } from '../../_services/department.service';
 import { EmployeeService, AlertService, AccountService } from '@app/_services';
 import { Employee } from '../../_models/employee';
-import { PositionService } from '../../_services/position.service'; 
+import { PositionService } from '../../_services/position.service';
 
 @Component({
   selector: 'app-employee-add-edit',
@@ -24,7 +24,8 @@ export class AddEditComponent implements OnInit, OnDestroy {
 
   accounts: any[] = [];
   departments: any[] = [];
-  positions: any[] = []; 
+  positions: any[] = [];
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -50,10 +51,14 @@ export class AddEditComponent implements OnInit, OnDestroy {
       next: (departments: any[]) => this.departments = departments,
       error: err => console.error('Error loading departments', err)
     });
-    this.positionService.getAll().pipe(first()).subscribe({ // 👈 Add this
-      next: (positions: any[]) => this.positions = positions.filter(p => p.status === 'Active'),
-      error: err => console.error('Error loading positions', err)
-    });
+
+    this.positionService.getAll().pipe(first()).subscribe({
+  next: (positions: any[]) => {
+    this.positions = positions.filter(p => p.status === 'Active');
+  },
+  error: err => console.error('Error loading positions', err)
+});
+
 
     // watch params (works for both add and edit routes)
     this.routeSub = this.route.params.subscribe(params => {
@@ -78,7 +83,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
               this.form.patchValue({
                 employeeId: x.employeeId,
                 accountId: x.accountId != null ? String(x.accountId) : '',
-                position: x.position ?? '',
+                positionId: x.position?.id ? String(x.position.id) : '',
                 departmentId: x.departmentId != null ? String(x.departmentId) : '',
                 hireDate,
                 status: x.status ?? 'Active'
@@ -145,7 +150,7 @@ export class AddEditComponent implements OnInit, OnDestroy {
 
     if (this.id) {
       // update by id (id may be string code)
-      payload = { ...raw, employeeId };
+      payload = { ...raw, employeeId, positionId: Number(raw.positionId) };
       request$ = this.employeeService.update(this.id!, payload);
       message = 'Employee updated';
     } else {

@@ -1,3 +1,6 @@
+import { Account } from './account';
+import { Department } from './department';
+
 export interface Position {
   id: number;
   name: string;
@@ -7,6 +10,4 @@ export interface Position {
    department?: string;
   createdAt?: string;
   updatedAt?: string;
-//   workflowId?: number;
-//   workflow?: { id: number, name: string };
 }
