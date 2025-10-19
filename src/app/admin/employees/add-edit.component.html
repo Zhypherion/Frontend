@@ -36,6 +36,24 @@
         </div>
       </div>
 
+
+
+      <!-- Department -->
+      <div class="form-group">
+        <label for="departmentId">Department</label>
+        <select 
+          id="departmentId"
+          name="departmentId"
+          formControlName="departmentId" 
+          class="form-control">
+          <option value="">-- Select Department --</option>
+          <option *ngFor="let dept of departments" [value]="dept.id">
+            {{ dept.name }}
+          </option>
+        </select>
+      </div>
+
+
       <!-- Position -->
       <div class="mb-3">
   <label for="positionId" class="form-label">Position</label>
@@ -57,20 +75,7 @@
 </div>
 
 
-      <!-- Department -->
-      <div class="form-group">
-        <label for="departmentId">Department</label>
-        <select 
-          id="departmentId"
-          name="departmentId"
-          formControlName="departmentId" 
-          class="form-control">
-          <option value="">-- Select Department --</option>
-          <option *ngFor="let dept of departments" [value]="dept.id">
-            {{ dept.name }}
-          </option>
-        </select>
-      </div>
+      
 
       <!-- Hire Date -->
       <div class="mb-3">
