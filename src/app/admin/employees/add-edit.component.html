@@ -40,16 +40,17 @@
       <div class="mb-3">
   <label for="positionId" class="form-label">Position</label>
   <select
-    id="positionId"
-    name="positionId"
-    formControlName="positionId"
-    class="form-select"
-    [ngClass]="{ 'is-invalid': submitted && f.positionId.errors }">
-    <option value="">-- Select Position --</option>
-    <option *ngFor="let pos of positions" [value]="pos.id">
-      {{ pos.name }} ({{ pos.department?.name }})
-    </option>
-  </select>
+  id="positionId"
+  name="positionId"
+  formControlName="positionId"
+  class="form-select"
+  [ngClass]="{ 'is-invalid': submitted && f.positionId.errors }">
+  <option value="">-- Select Position --</option>
+  <option *ngFor="let pos of filteredPositions" [value]="pos.id">
+    {{ pos.name }}
+  </option>
+</select>
+
   <div *ngIf="submitted && f.positionId.errors" class="invalid-feedback">
     Position is required
   </div>
