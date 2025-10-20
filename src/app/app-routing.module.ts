@@ -10,7 +10,7 @@ import { Role } from './_models';
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
 const adminModule = () => import('./admin/admin.module').then(x => x.AdminModule);
 const profileModule = () => import('./profile/profile.module').then(x => x.ProfileModule);
-const RequestModule = () => import('./requests/request.module').then(x => x.RequestModule);
+const RequestModule = () => import('./request/request.module').then(x => x.RequestModule);
 
 // New lazy-loaded modules
 const employeeModule = () => import('./admin/employees/employee.module').then(x => x.EmployeeModule);
