@@ -1,12 +1,10 @@
 <h1 class="text-3xl font-bold mb-6">Employee Requests</h1>
-
-<!-- Show Add button only for admin/manager -->
-<p class="mb-4" *ngIf="isAdminOrManager">
+<p class="mb-4">
   <a [routerLink]="['/admin/requests/add']" class="btn btn-sm btn-primary">Add New Request</a>
 </p>
 
 <table class="w-full table-auto border-collapse shadow-lg rounded-lg overflow-hidden">
-  <thead class="bg-gray-800 text-white">
+  <thead class="bg-gray-800 text-black">
     <tr>
       <th class="py-3 px-4 text-left">Request ID</th>
       <th class="py-3 px-4 text-left">Employee</th>
@@ -18,71 +16,33 @@
     </tr>
   </thead>
   <tbody class="bg-white text-gray-700">
-    <!-- Loading spinner -->
     <tr *ngIf="loading">
       <td colspan="7" class="text-center py-4">
         <span class="spinner-border spinner-border-lg align-center"></span>
       </td>
     </tr>
 
-    <!-- Empty state -->
-    <tr *ngIf="!loading && requests.length === 0">
-      <td colspan="7" class="text-center text-gray-500 py-4">
-        No requests found.
-      </td>
-    </tr>
-
-    <!-- Data rows -->
     <tr *ngFor="let request of requests" class="border-b border-gray-200 hover:bg-gray-100">
       <td class="py-3 px-4">{{ request.id }}</td>
       <td class="py-3 px-4">
-        {{ request.employee?.employeeId }} - {{ request.employee?.account?.email }}
+        {{ request.employee?.employeeId }} -
+        {{ request.employee?.account?.email }}
       </td>
       <td class="py-3 px-4">{{ request.type }}</td>
       <td class="py-3 px-4">{{ request.items }}</td>
       <td class="py-3 px-4">
-        <span
-          class="px-2 py-1 rounded-full text-xs font-semibold"
+        <span class="px-2 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
             'bg-green-100 text-green-800': request.status === 'Approved',
             'bg-yellow-100 text-yellow-800': request.status === 'Pending',
             'bg-red-100 text-red-800': request.status === 'Rejected'
-          }"
-        >
+          }">
           {{ request.status }}
         </span>
       </td>
-      <td class="py-3 px-4">{{ request.createdAt | date: 'short' }}</td>
+      <td class="py-3 px-4">{{ request.createdAt | date:'short' }}</td>
       <td class="py-3 px-4">
-        <!-- Edit button - only for admin/manager -->
-        <a 
-          *ngIf="isAdminOrManager" 
-          [routerLink]="['/admin/requests/edit', request.id]" 
-          class="btn btn-sm btn-info me-2"
-        >
-          Edit
-        </a>
-
-        <!-- Approve/Reject buttons - only for admin/manager and pending requests -->
-        <ng-container *ngIf="isAdminOrManager && request.status === 'Pending'">
-          <button 
-            (click)="approveRequest(request.id)" 
-            class="btn btn-sm btn-success me-2"
-          >
-            Approve
-          </button>
-          <button 
-            (click)="rejectRequest(request.id)" 
-            class="btn btn-sm btn-danger"
-          >
-            Reject
-          </button>
-        </ng-container>
-
-        <!-- View only for regular employees -->
-        <span *ngIf="!isAdminOrManager" class="text-gray-500 text-sm">
-          View Only
-        </span>
+        <a [routerLink]="['/admin/requests/edit', request.id]" class="btn btn-sm btn-info me-2">Edit</a>
       </td>
     </tr>
   </tbody>
