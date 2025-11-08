@@ -8,7 +8,7 @@
                 <!-- <a routerLink="/admin/accounts" routerLinkActive="active" class="nav-item nav-link">Account</a> -->
                 <!-- <a *ngIf="account.role === Role.Admin" routerLink="/employees" routerLinkActive="active" class="nav-item nav-link">Employees</a> -->
                 <!-- <a *ngIf="account.role === Role.Admin" routerLink="/departments" routerLinkActive="active" class="nav-item nav-link">Departments</a> -->
-                <a *ngIf="account.role == Role.Admin || Role.Employee " routerLink="/request" routerLinkActive="active" class="nav-item nav-link">Requests</a>
+                <a *ngIf="account.role === Role.Admin || Role.Employee " routerLink="/requests" routerLinkActive="active" class="nav-item nav-link">Requests</a>
                 <a></a>
                 <button (click)="logout()" class="btn btn-link nav-item nav-link logout-button">Logout</button>
             </div>
