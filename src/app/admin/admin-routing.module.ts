@@ -10,7 +10,7 @@ const employeesModule = () => import('./employees/employee.module').then(x => x.
 const departmentsModule = () => import('./departments/department.module').then(x => x.DepartmentModule);
 const requestsModule = () => import('./request/request.module').then(x => x.RequestModule);
 const positionsModule = () => import('./positions/position.module').then(x => x.PositionModule);
-
+const approverModule = () => import('./request/approver.module').then(x => x.ApproverModule);
 
 
 
@@ -25,6 +25,7 @@ const routes: Routes = [
             { path: 'departments', loadChildren: departmentsModule },
             { path: 'request', loadChildren: requestsModule },
             { path: 'positions', loadChildren: positionsModule },
+            { path: 'approver', loadChildren: approverModule},
 
         ]
     }

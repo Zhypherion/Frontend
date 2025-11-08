@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router';
 
 import { RequestsComponent } from './requests.component';
 import { AddEditComponent } from './add-edit.component';
+import { ApproverComponent } from './approver.component';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { AddEditComponent } from './add-edit.component';
     RouterModule.forChild([
       { path: '', component: RequestsComponent },
       { path: 'add', component: AddEditComponent },
-      { path: 'edit/:id', component: AddEditComponent }
+      { path: 'edit/:id', component: AddEditComponent },
+      { path: 'approver', component: ApproverComponent }
     ])
   ],
   declarations: [

@@ -1,10 +1,4 @@
 <h1 class="text-3xl font-bold mb-6">Employee Requests</h1>
-<p class="mb-4">
-  <a [routerLink]="['/admin/requests/add']" class="btn btn-sm btn-primary">Add New Request</a>
-</p>
-<p class="mb-2">
-  <a [routerLink]="['/admin/request/approver']" class="btn btn-sm btn-primary">Requests</a>
-</p>
 
 <table class="w-full table-auto border-collapse shadow-lg rounded-lg overflow-hidden">
   <thead class="bg-gray-800 text-black">
@@ -19,33 +13,58 @@
     </tr>
   </thead>
   <tbody class="bg-white text-gray-700">
+    <!-- Spinner -->
     <tr *ngIf="loading">
       <td colspan="7" class="text-center py-4">
         <span class="spinner-border spinner-border-lg align-center"></span>
       </td>
     </tr>
 
+    <!-- Empty State -->
+    <tr *ngIf="!loading && requests.length === 0">
+      <td colspan="7" class="text-center text-gray-500 py-4">
+        No requests found.
+      </td>
+    </tr>
+
+    <!-- Data Rows -->
     <tr *ngFor="let request of requests" class="border-b border-gray-200 hover:bg-gray-100">
       <td class="py-3 px-4">{{ request.id }}</td>
       <td class="py-3 px-4">
-        {{ request.employee?.employeeId }} -
-        {{ request.employee?.account?.email }}
+        {{ request.employee?.employeeId }} - {{ request.employee?.account?.email }}
       </td>
       <td class="py-3 px-4">{{ request.type }}</td>
       <td class="py-3 px-4">{{ request.items }}</td>
       <td class="py-3 px-4">
-        <span class="px-2 py-1 rounded-full text-xs font-semibold"
+        <span
+          class="px-2 py-1 rounded-full text-xs font-semibold"
           [ngClass]="{
             'bg-green-100 text-green-800': request.status === 'Approved',
             'bg-yellow-100 text-yellow-800': request.status === 'Pending',
             'bg-red-100 text-red-800': request.status === 'Rejected'
-          }">
+          }"
+        >
           {{ request.status }}
         </span>
       </td>
-      <td class="py-3 px-4">{{ request.createdAt | date:'short' }}</td>
-      <td class="py-3 px-4">
-        <a [routerLink]="['/admin/requests/edit', request.id]" class="btn btn-sm btn-info me-2">Edit</a>
+      <td class="py-3 px-4">{{ request.createdAt | date: 'short' }}</td>
+
+      <!-- ✅ Actions -->
+      <td class="py-3 px-4 space-x-2">
+        <button
+          class="bg-green-600 text-black px-3 py-1 rounded hover:bg-green-700"
+          (click)="approveRequest(request.id)"
+          [disabled]="request.status === 'Approved'"
+        >
+          Approve
+        </button>
+        <button
+          class="bg-red-600 text-black px-3 py-1 rounded hover:bg-red-700"
+          (click)="rejectRequest(request.id)"
+          [disabled]="request.status === 'Rejected'"
+        >
+          Reject
+        </button>
       </td>
     </tr>
   </tbody>
