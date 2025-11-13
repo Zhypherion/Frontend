@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestService } from '@app/_services/requests.service';
-
+import { AccountService } from '@app/_services';
 @Component({
   selector: 'app-add-edit',
   templateUrl: './add-edit.component.html'
@@ -19,7 +19,8 @@ export class AddEditComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private requestService: RequestService
+    private requestService: RequestService,
+    public accountService: AccountService
   ) {}
 
   ngOnInit(): void {
@@ -64,7 +65,7 @@ export class AddEditComponent implements OnInit {
     this.requestService.createRequest(this.form.value)
       .subscribe({
         next: () => {
-          this.router.navigate(['/admin/requests']);
+          this.router.navigate(['/requests']);
         },
         error: err => {
           console.error(err);

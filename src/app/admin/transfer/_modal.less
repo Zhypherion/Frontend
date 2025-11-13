@@ -1,0 +1,366 @@
+// /* You can add global styles to this file, and also import other style files */
+// .app-container {
+//     min-height: 100vh;
+// }
+
+// .admin-nav {
+//     padding-top: 0;
+//     padding-bottom: 0;
+//     background-color: #000000;
+//     border-bottom: 5px solid #ccc;
+// }
+
+// .btn-delete-account {
+//     width: 40px;
+//     text-align: center;
+//     box-sizing: content-box;
+// }
+
+// // --- Global Variables (Existing) ---
+// @primary-color: #007bff;
+// @body-bg: #f8f9fa;
+// @card-bg: rgba(255, 255, 255, 0.9); // Slightly transparent white for the login box
+// @text-color: #333;
+// @label-color: #555;
+// @border-color: #ddd;
+// @border-radius: 8px;
+// @box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+// @link-color: @primary-color;
+// @icon-color: #6c757d;
+// @login-background-image: url('../bg.jpg'); // Replace with your image path
+// @login-background-size: cover;
+// @login-background-repeat: no-repeat;
+// @login-background-position: center center;
+
+// // --- NEW Modal Variables and Mixins ---
+// @modal-z-index: 1050;
+// @modal-backdrop-bg: #000;
+// @modal-backdrop-opacity: 0.5;
+// @modal-max-width: 500px;
+// @modal-padding: 25px; // Consistent with .card-body padding
+
+// // Mixin to center content (Flexbox method)
+// .center-fixed-content() {
+//     display: flex;
+//     align-items: center; // Vertical centering
+//     justify-content: center; // Horizontal centering
+//     min-height: 100vh;
+// }
+
+// // --- HTML/BODY Styles (Existing) ---
+// html, body {
+//     height: 100%; /* Ensure full viewport height for the background */
+//     width: 100%;
+//     margin: 0;
+//     padding: 0;
+// }
+
+// body {
+//     justify-content: center;
+//     align-items: center;
+//     background-image: @login-background-image;
+//     background-size: @login-background-size;
+//     background-repeat: @login-background-repeat;
+//     background-position: @login-background-position;
+//     font-family: sans-serif;
+// }
+
+// .card {
+//   width: 600px;
+//   background-color: @card-bg; /* Use the slightly transparent background */
+//   border-radius: @border-radius;
+//   box-shadow: @box-shadow;
+  
+
+//   .card-header {
+//     background-color: @primary-color;
+//     color: white;
+//     text-align: center;
+//     padding: 15px;
+//     border-bottom: 1px solid darken(@primary-color, 10%);
+//     border-top-left-radius: @border-radius;
+//     border-top-right-radius: @border-radius;
+//     h3 {
+//       margin: 0;
+//     }
+//   }
+
+//   .card-body {
+//     padding: 25px;
+
+//     .form-label {
+//       display: block;
+//       margin-bottom: 8px;
+//       color: @label-color;
+//       font-weight: bold;
+//     }
+
+//     .form-control {
+//       width: 100%;
+//       padding: 12px;
+//       border: 1px solid @border-color;
+//       border-radius: @border-radius / 2; /* Slightly less rounded inputs */
+//       box-sizing: border-box;
+//       font-size: 16px;
+
+//       &.is-invalid {
+//         border-color: #dc3545;
+//       }
+//     }
+
+//     .invalid-feedback {
+//       color: #dc3545;
+//       font-size: 0.875em;
+//       margin-top: 0.25rem;
+//     }
+
+//     .mb-3 {
+//       margin-bottom: 25px;
+//     }
+
+//     .row {
+//       display: flex;
+//       justify-content: space-between;
+//       align-items: center;
+//     }
+
+//     .btn {
+//       padding: 12px 20px;
+//       border: none;
+//       border-radius: @border-radius / 2;
+//       cursor: pointer;
+//       font-size: 16px;
+//       transition: background-color 0.15s ease-in-out;
+
+//       &.btn-primary {
+//         background-color: @primary-color;
+//         color: white;
+
+//         &:hover {
+//           background-color: darken(@primary-color, 10%);
+//         }
+
+//         &:disabled {
+//           background-color: lighten(@primary-color, 20%);
+//           cursor: not-allowed;
+//         }
+
+//         .spinner-border {
+//           display: inline-block;
+//           width: 1em;
+//           height: 1em;
+//           vertical-align: text-bottom;
+//           border: 0.25em solid currentColor;
+//           border-right-color: transparent;
+//           border-radius: 50%;
+//           animation: spinner-border 0.75s linear infinite;
+//         }
+//       }
+
+//       &.btn-link {
+//         background: none;
+//         color: @link-color;
+//         text-decoration: none;
+
+//         &:hover {
+//           text-decoration: underline;
+//         }
+//       }
+//     }
+
+//     .text-end {
+//       text-align: right;
+//     }
+
+//     .password-input-wrapper {
+//       position: relative;
+
+//       button {
+//         position: absolute;
+//         right: 12px;
+//         top: 50%;
+//         transform: translateY(-50%);
+//         background: none;
+//         border: none;
+//         cursor: pointer;
+//         color: @icon-color;
+//         font-size: 16px;
+//       }
+//     }
+//   }
+// }
+
+
+// @keyframes spinner-border {
+//     to {
+//         transform: rotate(360deg);
+//     }
+// }
+
+// // ... (Existing menu/sidebar styles)
+// .app-container {
+//     display: flex;
+//     height: 100vh;
+//     overflow: hidden;
+// }
+// .sidebar {
+//     width: 220px;
+//     background-color: #343a40;
+//     color: white;
+//     padding-top: 20px;
+//     display: flex;
+//     flex-direction: column;
+// }
+// .nav-links {
+//     display: flex;
+//     flex-direction: column;
+//     width: 100%;
+// }
+// .nav-link {
+//     color: #ffffff;
+//     padding: 12px 20px;
+//     font-weight: 500;
+//     text-decoration: none;
+//     transition: background 0.3s ease;
+// }
+// .nav-link:hover,
+// .nav-link.active {
+//     background-color: #495057;
+//     color: #ffffff;
+// }
+// .logout-button {
+//     text-align: left;
+//     padding-left: 20px;
+//     margin-top: auto;
+//     color: #ffffff;
+// }
+// .main-content {
+//     flex-grow: 1;
+//     padding: 40px;
+//     overflow-y: auto;
+//     background-color: #f8f9fa;
+// }
+
+
+// // ==========================================================
+// // --- NEW MODAL STYLES ADDED HERE ---
+// // ==========================================================
+
+// .modal-overlay {
+//     // The fixed, full-screen backdrop
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     width: 100%;
+//     height: 100%;
+//     background-color: fade(@modal-backdrop-bg, (@modal-backdrop-opacity * 100));
+//     z-index: @modal-z-index;
+//     overflow-y: auto; // Allow modal content to scroll if needed
+//     display: none; // Hidden by default (toggle this class with JavaScript)
+//     .center-fixed-content(); 
+//     padding: 1rem;
+//     opacity: 0; // Start invisible for transition
+//     transition: opacity 0.15s ease-in-out;
+
+//     &.is-visible {
+//         display: flex;
+//         opacity: 1;
+//     }
+// }
+
+// .modal-dialog {
+//     // The main container for the content
+//     position: relative;
+//     width: 100%;
+//     max-width: @modal-max-width;
+//     margin: 1.75rem auto;
+// }
+
+// .modal-content {
+//     // The panel for the form
+//     background-color: @card-bg; // Reusing card background variable
+//     border-radius: @border-radius;
+//     box-shadow: @box-shadow; // Reusing card shadow variable
+//     display: flex;
+//     flex-direction: column;
+//     pointer-events: auto; // Ensures clicks inside the modal work
+// }
+
+// .modal-header {
+//     padding: @modal-padding; // Consistent padding
+//     padding-bottom: 0.5rem;
+//     border-bottom: 1px solid @border-color;
+//     display: flex;
+//     justify-content: space-between;
+//     align-items: center;
+    
+//     h3 {
+//         margin: 0;
+//         font-size: 1.25rem;
+//         font-weight: bold;
+//         color: @text-color;
+//     }
+// }
+
+// .modal-body {
+//     padding: @modal-padding;
+//     // Style for the message block within the modal
+//     .message-alert {
+//         padding: 1rem;
+//         border-radius: 0.5rem;
+//         box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+//         margin-bottom: 1.5rem;
+//     }
+
+//     .alert-success {
+//         background-color: #d1fae5; // green-100
+//         color: #065f46; // green-800
+//     }
+
+//     .alert-error {
+//         background-color: #fee2e2; // red-100
+//         color: #991b1b; // red-800
+//     }
+// }
+
+// .modal-footer {
+//     padding: @modal-padding;
+//     padding-top: 0.5rem;
+//     border-top: 1px solid @border-color;
+//     display: flex;
+//     justify-content: flex-end;
+//     gap: 0.75rem;
+
+//     .btn {
+//         .btn(); // Inherit existing button styles
+
+//         &.btn-secondary {
+//             background-color: #6c757d; // Bootstrap secondary
+//             color: white;
+            
+//             &:hover {
+//                 background-color: darken(#6c757d, 10%);
+//             }
+//         }
+        
+//         // Inherit btn-primary from the existing global styles
+//     }
+// }
+
+// // --- Form Group Styles specific to the modal ---
+
+// .modal-form-group {
+//     margin-bottom: 1rem;
+    
+//     label {
+//         .card-body .form-label(); // Inherit label styles
+//     }
+    
+//     select {
+//         .card-body .form-control(); // Inherit form control styles
+//     }
+    
+//     .validation-error {
+//         .card-body .invalid-feedback(); // Inherit invalid feedback styles
+//     }
+// }

@@ -1,3 +1,4 @@
+<!-- add-edit.component.html -->
 <h2 class="text-2xl font-bold mb-4">{{ isAddMode ? 'Add Request' : 'Edit Request' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 max-w-lg">
@@ -49,6 +50,6 @@
     <button [disabled]="loading" class="btn btn-primary">
       {{ isAddMode ? 'Create' : 'Update' }}
     </button>
-    <a routerLink="/admin/requests" class="btn btn-secondary ml-2">Cancel</a>
+    <a routerLink="/requests" class="btn btn-secondary ml-2">Cancel</a>
   </div>
 </form>

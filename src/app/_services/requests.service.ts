@@ -88,6 +88,11 @@ export class RequestService {
   rejectRequest(id: number, body: any = {}): Observable<any> {
     return this.http.put(`${environment.apiUrl}/requests/${id}/reject`, body);
   }
+  
+  getMyRequests(): Observable<any[]> {
+  return this.http.get<any[]>(`${environment.apiUrl}/requests/my`);
+}
+
 }
 
 

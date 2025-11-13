@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { RequestService } from '@app/_services/requests.service';
+import { AccountService } from '@app/_services';
+
 
 @Component({
   selector: 'app-add-edit',
@@ -19,7 +21,8 @@ export class AddEditComponent implements OnInit {
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
-    private requestService: RequestService
+    private requestService: RequestService,
+     public accountService: AccountService // 👈 add
   ) {}
 
   ngOnInit(): void {
@@ -36,9 +39,18 @@ export class AddEditComponent implements OnInit {
     
 
     // Load employees for dropdown
-    this.requestService.getActiveEmployees().subscribe(data => {
-      this.employees = data;
-    });
+    const account = this.accountService.accountValue;
+
+if (account?.id) {
+  // Get employee linked to logged-in account
+  this.requestService.getAllEmployees().subscribe(emps => {
+    const current = emps.find(e => e.account?.id === account.id);
+    if (current) {
+      this.form.patchValue({ employeeId: current.id });
+    }
+  });
+}
+
 
     if (!this.isAddMode) {
       this.requestService.getRequestById(this.id)

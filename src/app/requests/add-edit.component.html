@@ -1,18 +1,28 @@
 <h2 class="text-2xl font-bold mb-4">{{ isAddMode ? 'Add Request' : 'Edit Request' }}</h2>
 
 <form [formGroup]="form" (ngSubmit)="onSubmit()" class="space-y-4 max-w-lg">
+ <!-- ✅ Show employee dropdown only for Admins -->
+<div *ngIf="accountService.accountValue?.role === 'Admin'; else autoEmployee">
+  <label class="block mb-1">Employee</label>
+  <select formControlName="employeeId" class="form-control w-full">
+    <option value="">-- Select Employee --</option>
+    <option *ngFor="let emp of employees" [value]="emp.id">
+      {{ emp.employeeId }} - {{ emp.account?.email }}
+    </option>
+  </select>
+  <div *ngIf="submitted && f['employeeId'].errors" class="text-red-500 text-sm">
+    Employee is required
+  </div>
+</div>
+
+<!-- ✅ Non-admins: show their employee ID read-only -->
+<ng-template #autoEmployee>
   <div>
     <label class="block mb-1">Employee</label>
-    <select formControlName="employeeId" class="form-control w-full">
-      <option value="">-- Select Employee --</option>
-      <option *ngFor="let emp of employees" [value]="emp.id">
-        {{ emp.employeeId }} - {{ emp.account?.email }}
-      </option>
-    </select>
-    <div *ngIf="submitted && f['employeeId'].errors" class="text-red-500 text-sm">
-      Employee is required
-    </div>
+    <input type="text" class="form-control w-full bg-gray-100" [value]="form.value.employeeId" disabled />
   </div>
+</ng-template>
+
 
   <div>
   <label class="block mb-1">Type</label>
@@ -49,6 +59,6 @@
     <button [disabled]="loading" class="btn btn-primary">
       {{ isAddMode ? 'Create' : 'Update' }}
     </button>
-    <a routerLink="/admin/requests" class="btn btn-secondary ml-2">Cancel</a>
+    <a routerLink="/request" class="btn btn-secondary ml-2">Cancel</a>
   </div>
 </form>

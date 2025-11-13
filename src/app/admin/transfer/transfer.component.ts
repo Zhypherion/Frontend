@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-transfer',
-  templateUrl: './transfer.components.html'
+  templateUrl: './transfer.component.html'
 })
 export class TransferComponent implements OnInit {
   employeeId!: string;

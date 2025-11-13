@@ -12,4 +12,9 @@ export class TransferService {
   transfer(employeeId: string, departmentId: number): Observable<any> {
     return this.http.post(`${this.baseUrl}/${employeeId}/transfer`, { departmentId });
   }
+  /** 🔹 Transfer employee to another department */
+  transferEmployee(employeeId: string, departmentId: string): Observable<any> {
+    // ✅ fixed endpoint and verb
+    return this.http.post(`${this.baseUrl}/${employeeId}/transfer`, { departmentId });
+  }
 }
